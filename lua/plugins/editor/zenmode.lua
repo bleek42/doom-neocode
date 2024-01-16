@@ -28,16 +28,16 @@ return {
       on_open = function()
         -- disable diagnostics, indent blankline, and winbar
         vim.g.diagnostics_mode_old = vim.g.diagnostics_mode
-        vim.g.indent_blankline_enabled_old = vim.g.indent_blankline_enabled
+        vim.g.indent_blankline_enabledd_old = vim.g.indent_blankline_enabledd
         vim.g.winbar_old = vim.wo.winbar
         vim.g.diagnostics_mode = 0
-        vim.g.indent_blankline_enabled = false
+        vim.g.indent_blankline_enabledd = false
         vim.wo.winbar = nil
       end,
       on_close = function()
         -- restore diagnostics, indent blankline, and winbar
         vim.g.diagnostics_mode = vim.g.diagnostics_mode_old
-        vim.g.indent_blankline_enabled = vim.g.indent_blankline_enabled_old
+        vim.g.indent_blankline_enabledd = vim.g.indent_blankline_enabledd_old
         vim.wo.winbar = vim.g.winbar_old
       end
     }

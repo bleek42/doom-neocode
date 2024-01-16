@@ -78,7 +78,7 @@ return {
       -- Optional, set to true to force ':ObsidianOpen' to bring the app to the foreground.
       open_app_foreground = true,
       ui = {
-        enable = true,         -- set to false to disable all additional syntax features
+        enabled = true,         -- set to false to disable all additional syntax features
         update_debounce = 200, -- update delay after a text change (in milliseconds)
         -- Define how various check-boxes are displayed
         checkboxes = {

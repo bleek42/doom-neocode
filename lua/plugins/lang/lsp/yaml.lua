@@ -6,7 +6,7 @@ function M.setup(capabilities, on_attach)
         settings = {
             yaml = {
                 completion = true,
-                format = { enable = true },
+                format = { enabled = true },
                 hover = true,
                 validate = true,
 

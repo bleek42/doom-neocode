@@ -115,7 +115,7 @@ return {
 
   -- {
   --     "wakatime/vim-wakatime",
-  --     enabled = false,
+  --     enabledd = false,
   --     config = function()
   --         local waka_time = require("wakatime")
   --     end

@@ -39,18 +39,18 @@ return {
           "zig",
         },
         highlight = {
-          enable = true
+          enabled = true
         },
         indent = {
-          enable = true
+          enabled = true
         },
         incremental_selection = {
-          enable = true
+          enabled = true
         },
         sync_install = false,
         -- third party
         rainbow = {
-          enable = true
+          enabled = true
         }
       })
     end,

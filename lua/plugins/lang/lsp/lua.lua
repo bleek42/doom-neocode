@@ -21,7 +21,7 @@ function M.setup(capabilities, on_attach)
                     vim.env.VIMRUNTIME,
                 },
                 telemetry = {
-                    enable = false,
+                    enabled = false,
                 },
             },
         },

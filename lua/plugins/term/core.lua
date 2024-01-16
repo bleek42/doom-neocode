@@ -1,40 +1,44 @@
 return {
-
   {
-    "aserowy/tmux.nvim",
-    enable = false,
-    -- function ()
-    --   if vim.g.vscode then
-    --     return false
-    --   end
-    --   return true
-    -- end,
+    "phaazon/hop.nvim",
+    name = "hop",
+    branch = "v2",
+    enabled = function()
+      if vim.g.vscode then
+        return true
+      else
+        return false
+      end
+    end,
 
     config = function()
-      require("tmux").setup(
-        {
-          copy_sync = {
-            enable = true,
-            redirect_to_clipboard = true
-          },
-          navigation = {
-            cycle_navigation = false,
-            enable_default_keybindings = true,
-            persist_zoom = true
-          },
-          resize = {
-            enable_default_keybindings = true
-          }
-        }
-      )
+      require("hop").setup({})
     end
   },
 
   {
-    "akinsho/toggleterm.nvim",
-    opts = {
-      terminal_mappings = false
-    }
-  }
+    "b3nj5m1n/kommentary",
+    enabled = function()
+      if vim.g.vscode then
+        return true
+      else
+        return false
+      end
+    end,
 
+    config = function()
+      require("kommentary.config")
+    end
+  },
+
+  {
+    "unblevable/quick-scope",
+    enabled = function()
+      if vim.g.vscode then
+        return true
+      else
+        return false
+      end
+    end,
+  }
 }

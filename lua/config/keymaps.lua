@@ -318,7 +318,7 @@ end
 --         handler_opts = {
 --             border = "single",
 --         },
---         hint_enable = false,
+--         hint_enabled = false,
 --     })
 
 --     keymapper.register_bufnr(bufnr, "n", keymaps.editor_on_text)

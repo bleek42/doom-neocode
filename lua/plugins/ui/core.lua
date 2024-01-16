@@ -2,7 +2,7 @@ return {
 
   {
     "nvim-neo-tree/neo-tree.nvim",
-    enable = false
+    enabled = false
   },
 
   {
@@ -223,7 +223,7 @@ return {
 
     opts = function(_, opts)
       opts.scroll = {
-        enable = false
+        enabled = false
       }
     end
   },
