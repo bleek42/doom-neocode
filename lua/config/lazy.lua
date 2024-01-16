@@ -61,6 +61,9 @@ if vim.g.vscode then
     }
   })
 else
+
+  opts.colorscheme = "hardhacker"
+
   require("lazy").setup({
     spec = {
       -- add LazyVim and import its plugins
@@ -136,9 +139,9 @@ else
       },
 
       -- import any custom plugins here
-      {
-        import = "plugins.core"
-      },
+      -- {
+      --   import = "plugins.core"
+      -- },
 
       {
         import = "plugins.theme"
@@ -157,10 +160,6 @@ else
       },
 
       {
-        import = "plugins.telescope"
-      },
-
-      {
         import = "plugins.term"
       },
 
@@ -176,11 +175,11 @@ else
       -- version = "*", -- try installing the latest stable version for plugins that support semver
     },
     install = {
-      colorscheme = { "hardhacker" },
+      colorscheme = { "hardhacker", "gruvbox", "github" },
     },
     checker = {
       -- automatically check for plugin updates
-      enabled = false
+      enabled = true
     },
     performance = {
       rtp = {
@@ -193,8 +192,7 @@ else
           "matchparen",
           "tarPlugin",
           "tohtml",
-          "zipPlugin",
-          "neo-tree"
+          "zipPlugin"
         }
       }
     }

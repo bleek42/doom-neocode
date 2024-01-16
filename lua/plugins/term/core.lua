@@ -1,6 +1,15 @@
 return {
+
   {
     "aserowy/tmux.nvim",
+    enable = false,
+    -- function ()
+    --   if vim.g.vscode then
+    --     return false
+    --   end
+    --   return true
+    -- end,
+
     config = function()
       require("tmux").setup(
         {
@@ -27,4 +36,5 @@ return {
       terminal_mappings = false
     }
   }
+
 }

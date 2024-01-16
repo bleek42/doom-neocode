@@ -121,11 +121,10 @@ return {
         dependencies = {
             "rcarriga/nvim-dap-ui",
             "theHamsta/nvim-dap-virtual-text",
-            
         },
 
         config = function()
-            require("dap").setup()
+            require("dap.core").setup()
         end,
     },
 

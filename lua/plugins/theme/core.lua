@@ -4,8 +4,7 @@ return {
   {
     "hardhackerlabs/theme-vim",
     name = "hardhacker",
-    lazy = false,
-    priority = 9000,
+    priority = 8000,
     config = function()
       vim.g.hardhacker_hide_tilde = 1
       vim.g.hardhacker_keyword_italic = 1
@@ -19,7 +18,7 @@ return {
   {
     "loctvl842/monokai-pro.nvim",
     name = "monokai",
-    priority = 3000,
+    priority = 8000,
     -- config = function()
     --   require("monokai").setup()
     --   -- themer.activate_theme(themer.theme.name, themer.theme.style, false)
