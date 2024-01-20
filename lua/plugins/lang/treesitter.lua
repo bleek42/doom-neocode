@@ -18,8 +18,6 @@ return {
           "go",
           "graphql",
           "html",
-          "htmldjango",
-          "hyprlang",
           "javascript",
           "json",
           "json5",

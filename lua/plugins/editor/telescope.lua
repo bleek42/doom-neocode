@@ -1,18 +1,24 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
+    lazy = true,
+    event = "VeryLazy",
+    cmd = "Telescope",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-dap.nvim",
       "nvim-telescope/telescope-ui-select.nvim",
-      "ThePrimeagen/Harpoon"
+      "ThePrimeagen/Harpoon",
     },
+
     config = function(_, opts)
+      -- local themes = require("utils.themer")
+
       local actions = require("telescope.actions")
       local keymaps = {}
       keymaps.search = function(actions)
         return {
-          ["<C-c>"] = actions.delete_buffer,
+          ["<C-d>"] = actions.delete_buffer,
           ["<C-q>"] = actions.send_to_qflist
         }
       end
@@ -26,7 +32,20 @@ return {
               override_file_sorter = true,
               case_mode = "smart_case"
             },
-            ["ui-select"] = { require("telescope.themes").get_dropdown({}) }
+            ["ui-select"] = { require("telescope.themes").get_dropdown({
+              winblend = 10,
+              border = true,
+              previewer = false,
+              layout_config = {
+                height = 20,
+                width = 0.5
+              },
+              borderchars = {
+                prompt = { "─", " ", " ", " ", "─", "─", " ", " " },
+                results = { " " },
+                preview = { "─", "─", " ", " ", "─", "─", " ", " " }
+              }
+            }) }
           },
           mappings = {
             i = keymaps.search(actions),
@@ -44,20 +63,21 @@ return {
   },
 
   {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    build = "make"
-  },
-
-  {
     "joshmedeski/telescope-smart-goto.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim", "ThePrimeagen/harpoon" }
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "ThePrimeagen/harpoon"
+    }
   },
 
   {
 
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    cmd = { "TroubleToggle", "Trouble" },
+    cmd = {
+      "TroubleToggle",
+      "Trouble"
+    },
 
     config = function()
       local keymaps = {}

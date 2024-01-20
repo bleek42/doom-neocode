@@ -30,40 +30,40 @@ return {
     },
 
     opts = {
-      dir = "~/c/second-brain", -- no need to call 'vim.fn.expand' here
+      dir = "/mnt/c/Users/Public", -- no need to call 'vim.fn.expand' here
       completion = {
         nvim_cmp = true
       },
 
       daily_notes = {
-        folder = "Periodic 🌄/Days 🌄"
+        folder = "Documents",
         -- Optional, if you want to change the date format for the ID of daily notes.
-        -- date_format = "%Y-%m-%d",
+        date_format = "%Y-%m-%d",
         -- Optional, if you want to change the date format of the default alias of daily notes.
         -- alias_format = "%B %-d, %Y",
       },
 
       disable_frontmatter = true,
 
-      -- TODO: configure to my liking
-      -- Optional, alternatively you can customize the frontmatter data.
-      note_frontmatter_func = function(note)
-        -- This is equivalent to the default frontmatter function.
-        -- local out = { id = note.id, aliases = note.aliases, tags = note.tags }
-        -- -- `note.metadata` contains any manually added fields in the frontmatter.
-        -- -- So here we just make sure those fields are kept in the frontmatter.
-        -- if note.metadata ~= nil and require("obsidian").util.table_length(note.metadata) > 0 then
-        --   for k, v in pairs(note.metadata) do
-        --     out[k] = v
-        --   end
-        -- end
-        -- return out
-      end,
+      -- TODO: configure later
+      -- ? Optional, alternatively you can customize the frontmatter data.
+      -- * note_frontmatter_func = function(note)
+      -- ? This is equivalent to the default frontmatter function.
+      -- * local out = { id = note.id, aliases = note.aliases, tags = note.tags }
+      -- ? `note.metadata` contains any manually added fields in the frontmatter.
+      -- ? So here we just make sure those fields are kept in the frontmatter.
+      -- * if note.metadata ~= nil and require("obsidian").util.table_length(note.metadata) > 0 then
+      --  * for k, v in pairs(note.metadata) do
+      --  *   out[k] = v
+      -- *  end
+      -- * end
+      -- * return out
+      -- * end,
 
-      -- Optional, for templates (see below).
+      -- ? Optional, for templates (see below).
       templates = {
         subdir = "templates",
-        date_format = "%Y-%m-%d-%a",
+        date_format = "%Y-%m-%d",
         time_format = "%H:%M"
       },
 
@@ -73,7 +73,7 @@ return {
 
       -- Optional, set to true if you use the Obsidian Advanced URI plugin.
       -- https://github.com/Vinzent03/obsidian-advanced-uri
-      use_advanced_uri = true,
+      -- use_advanced_uri = true,
 
       -- Optional, set to true to force ':ObsidianOpen' to bring the app to the foreground.
       open_app_foreground = true,

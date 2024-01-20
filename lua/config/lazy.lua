@@ -7,10 +7,6 @@ end
 
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
--- if vim.loader and vim.fn.has("nvim-0.9.1") == 1 then
---   vim.loader.enabled()
--- end
-
 local opts = {}
 
 if vim.loop.os_uname().version:match("Windows") then
@@ -36,7 +32,11 @@ if vim.g.vscode then
       },
 
       {
-        import = "plugins.telescope",
+        import = "plugins.lang"
+      },
+
+      {
+        import = "plugins.editor.telescope",
       },
 
       {
@@ -54,14 +54,12 @@ if vim.g.vscode then
           "tarPlugin",
           "tohtml",
           "zipPlugin",
-          "tutor",
-          "neotree"
+          "tutor"
         }
       }
     }
   })
 else
-
   opts.colorscheme = "hardhacker"
 
   require("lazy").setup({
@@ -140,11 +138,11 @@ else
 
       -- import any custom plugins here
       -- {
-      --   import = "plugins.core"
+      --   import = "plugins"
       -- },
 
       {
-        import = "plugins.theme"
+        import = "plugins.themes"
       },
 
       {
@@ -152,11 +150,11 @@ else
       },
 
       {
-        import = "plugins.editor"
+        import = "plugins.lang"
       },
 
       {
-        import = "plugins.lang"
+        import = "plugins.editor"
       },
 
       {
@@ -175,7 +173,15 @@ else
       -- version = "*", -- try installing the latest stable version for plugins that support semver
     },
     install = {
-      colorscheme = { "hardhacker", "gruvbox", "github" },
+      colorscheme = {
+        "hardhacker",
+        "monokai-pro",
+        "catppuccin",
+        "gruvbox",
+        "github",
+        "onedark",
+        "tokyonight"
+      },
     },
     checker = {
       -- automatically check for plugin updates

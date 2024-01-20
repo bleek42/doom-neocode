@@ -1,66 +1,70 @@
 return {
-    {
-        "nvim-lualine/lualine.nvim",
-        dependencies = { "arkav/lualine-lsp-progress" },
 
-        config = function(plugin)
-            local tab_max_length = 24
-            local themer = require("themer")
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = {
+      "arkav/lualine-lsp-progress",
+      "hardhacker/vim-theme"
+    },
 
-            if plugin.override then
-                require("lazyvim.util").deprecate("lualine.override", "lualine.opts")
-            end
+    config = function(plugin)
+      local tab_max_length = 24
+      -- local themer = require("utils.themer")
 
-            require("lualine").setup({
-                extensions = {},
-                options = {
-                    theme = themer.get_lualine(themer.theme.name, themer.theme.style),
-                    component_separators = {
-                        left = "",
-                        right = ""
-                    },
-                    disabled_filetypes = { "toggleterm", "terminal" },
-                    section_separators = {
-                        left = "",
-                        right = ""
-                    }
-                },
-                sections = {
-                    lualine_b = { "branch", {
-                        "diff",
-                        symbols = {
-                            added = "󰐖 ",
-                            modified = "󱗜 ",
-                            removed = "󰍵 "
-                        }
-                    } },
-                    lualine_c = {
-                        "filename", {
-                        "diagnostics",
-                        sources = { "nvim_diagnostic" }
-                    },
-                        "lsp_progress"
-                    }
-                },
-                tabline = {
-                    lualine_a = {
-                        {
-                            "tabs",
-                            max_length = vim.o.columns,
-                            mode = 2,
-                            fmt = function(name)
-                                name = string.sub(name, 1, tab_max_length)
+      if plugin.override then
+        require("lazyvim.util").deprecate("lualine.override", "lualine.opts")
+      end
 
-                                local padding = tab_max_length - #name
-                                local pad_left = math.floor(padding / 2)
-                                local pad_right = math.ceil(padding / 2)
+      require("lualine").setup({
+        extensions = {},
+        options = {
+          -- theme = "",
+          component_separators = {
+            left = "",
+            right = ""
+          },
+          disabled_filetypes = { "toggleterm", "terminal" },
+          section_separators = {
+            left = "",
+            right = ""
+          }
+        },
+        sections = {
+          lualine_b = { "branch", {
+            "diff",
+            symbols = {
+              added = "󰐖 ",
+              modified = "󱗜 ",
+              removed = "󰍵 "
+            }
+          } },
+          lualine_c = {
+            "filename", {
+            "diagnostics",
+            sources = { "nvim_diagnostic" }
+          },
+            "lsp_progress"
+          }
+        },
+        tabline = {
+          lualine_a = {
+            {
+              "tabs",
+              max_length = vim.o.columns,
+              mode = 2,
+              fmt = function(name)
+                name = string.sub(name, 1, tab_max_length)
 
-                                return string.rep(" ", pad_left) .. name .. string.rep(" ", pad_right)
-                            end
-                        }
-                    }
-                }
-            })
-        end
-    }
+                local padding = tab_max_length - #name
+                local pad_left = math.floor(padding / 2)
+                local pad_right = math.ceil(padding / 2)
+
+                return string.rep(" ", pad_left) .. name .. string.rep(" ", pad_right)
+              end
+            }
+          }
+        }
+      })
+    end
+  }
 }
