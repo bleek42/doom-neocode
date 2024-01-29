@@ -2,7 +2,13 @@ return {
 
   {
     "nvim-neo-tree/neo-tree.nvim",
-    enabled = false
+    enabled = function()
+      if vim.fn.executable("nnn") or vim.fn.executable("ranger") then
+        return false
+      end
+
+      return true
+    end,
   },
 
   {
@@ -69,6 +75,4 @@ return {
       })
     end
   },
-
-
 }
