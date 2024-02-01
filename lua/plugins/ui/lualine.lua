@@ -4,12 +4,11 @@ return {
     "nvim-lualine/lualine.nvim",
     dependencies = {
       "arkav/lualine-lsp-progress",
-      "hardhacker/vim-theme"
+      "hardhackerlabs/theme-vim"
     },
 
     config = function(plugin)
       local tab_max_length = 24
-      -- local themer = require("utils.themer")
 
       if plugin.override then
         require("lazyvim.util").deprecate("lualine.override", "lualine.opts")

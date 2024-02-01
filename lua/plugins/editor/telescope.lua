@@ -8,7 +8,7 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-dap.nvim",
       "nvim-telescope/telescope-ui-select.nvim",
-      "ThePrimeagen/Harpoon",
+      "ThePrimeagen/harpoon",
     },
 
     config = function(_, opts)
@@ -69,36 +69,5 @@ return {
       "ThePrimeagen/harpoon"
     }
   },
-
-  {
-
-    "folke/trouble.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    cmd = {
-      "TroubleToggle",
-      "Trouble"
-    },
-
-    config = function()
-      local keymaps = {}
-      keymaps.diagnostics = {
-        ["close"] = "q",
-        ["cancel"] = "c",
-        ["refresh"] = "r",
-        ["jump"] = "j",
-        ["hover"] = "h",
-        ["toggle_fold"] = "<space>",
-        ["previous"] = "<C-p>",
-        ["next"] = "<C-n>"
-      }
-
-      vim.cmd([[autocmd WinEnter * if winnr('$') == 1 && &ft == 'Trouble' | q | endif]])
-
-      require("trouble").setup({
-        use_diagnostic_signs = true,
-        action_keys = keymaps.diagnostics
-      })
-    end,
-  }
 
 }

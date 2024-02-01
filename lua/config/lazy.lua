@@ -32,16 +32,13 @@ if vim.g.vscode then
       },
 
       {
-        import = "plugins.lang"
+        import = "plugins.editor.vscode"
       },
 
       {
         import = "plugins.editor.telescope",
       },
 
-      {
-        import = "plugins.vsc"
-      }
     },
     performance = {
       rtp = {
@@ -137,30 +134,9 @@ else
       },
 
       -- import any custom plugins here
-      -- {
-      --   import = "plugins"
-      -- },
-
       {
-        import = "plugins.themes"
+        import = "plugins"
       },
-
-      {
-        import = "plugins.ui"
-      },
-
-      {
-        import = "plugins.lang"
-      },
-
-      {
-        import = "plugins.editor"
-      },
-
-      {
-        import = "plugins.term"
-      },
-
     },
 
     defaults = {
