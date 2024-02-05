@@ -6,7 +6,6 @@ return {
         lazy = false,
         priority = 9000,
         dependencies = {
-            "hardhackerlabs/theme-vim",
             "nvim-tree/nvim-web-devicons",
         },
 

@@ -1,8 +1,8 @@
 return {
 	{
 		"zaldih/themery.nvim",
-		lazy = false,
-		priority = 4000,
+        lazy = false,
+        priority = 4000,
 		-- dependencies = {
 		-- 	"hardhackerlabs/theme-vim",
 		-- 	"loctvl842/monokai",
@@ -66,7 +66,7 @@ return {
 		"hardhackerlabs/theme-vim",
 		name = "hardhacker",
 		lazy = false,
-		priority = 1000,
+        priority = 9000,
 		config = function()
 			-- local opts = {
 			--   transparent = false,

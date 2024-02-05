@@ -1,119 +1,130 @@
 if vim.g.vscode then
-  vim.keymap.set("n", "<C-b><C-s>", "<cmd>call VSCodeNotify('workbench.action.files.save')<cr>]")
-  vim.keymap.set("n", "fmt", "<cmd>call VSCodeNotify('editor.action.formatDocument')<cr>")
-  vim.keymap.set("n", "gi", "<cmd>call VSCodeNotify('editor.action.goToImplementation')<cr>")
-  vim.keymap.set("n", "gn", "<cmd>call VSCodeNotify('editor.action.marker.next')<cr>")
-  vim.keymap.set("n", "gp", "<cmd>call VSCodeNotify('editor.action.marker.prev')<cr>")
-  vim.keymap.set("n", "gr", "<cmd>call VSCodeNotify('editor.action.rename')<cr>")
-  vim.keymap.set("n", "gx", "<cmd>call VSCodeNotify('keyboard-quickfix.openQuickFix')<cr>")
+    vim.keymap.set("n", "<C-b><C-s>", "<cmd>call VSCodeNotify('workbench.action.files.save')<cr>]")
+    vim.keymap.set("n", "fmt", "<cmd>call VSCodeNotify('editor.action.formatDocument')<cr>")
+    vim.keymap.set("n", "gi", "<cmd>call VSCodeNotify('editor.action.goToImplementation')<cr>")
+    vim.keymap.set("n", "gn", "<cmd>call VSCodeNotify('editor.action.marker.next')<cr>")
+    vim.keymap.set("n", "gp", "<cmd>call VSCodeNotify('editor.action.marker.prev')<cr>")
+    vim.keymap.set("n", "gr", "<cmd>call VSCodeNotify('editor.action.rename')<cr>")
+    vim.keymap.set("n", "gx", "<cmd>call VSCodeNotify('keyboard-quickfix.openQuickFix')<cr>")
 
-  vim.keymap.set("n", "<leader>k", "<cmd>HopChar1<cr>")
-  vim.keymap.set("n", "<leader>l", "<cmd>HopLine<cr>")
-  vim.keymap.set("n", "<leader>w", "<cmd>HopWord<cr>")
-else
-  -- Keymaps are automatically loaded on the VeryLazy event
-  -- Default keymaps that are always set:
-  -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
-  -- Add any additional keymaps here
-  -- Keymaps are automatically loaded on the VeryLazy event
-  -- Default keymaps that are always set:
-  -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
-  -- Add any additional keymaps here
-  -- folds
-  vim.keymap.set("n", "<leader>Ne", "<cmd>NnnExplorer<cr>", {
-    desc = "Open Nnn Explorer",
-  })
-
-  vim.keymap.set("n", "<leader>Np", "<cmd>NnnPicker<cr>", {
-    desc = "Open Nnn Picker"
-  })
-
-  vim.keymap.set("n", "<Tab>", "<cmd>bn<cr>")
-  vim.keymap.set("n", "<S-Tab>", "<cmd>bp<cr>")
-
-  vim.keymap.set("n", "*", "*zz")
-
-  vim.keymap.set("n", "n", "nzz")
-  vim.keymap.set("n", "N", "Nzz")
-
-  vim.keymap.set("n", "<C-d>", "<C-d>zz")
-  vim.keymap.set("n", "<C-u>", "<C-u>zz")
-
-  -- lsp
-  vim.keymap.set("n", "<leader><space>", "<cmd>CodeActionMenu<cr>", {
-    desc = "Code Action Menu"
-  })
-
-  -- folds
-  vim.keymap.set("n", "<leader>z", "<cmd>normal! zMzv<cr>", {
-    desc = "Fold all others"
-  })
-
-  -- harpoon
-  vim.keymap.set("n", "<leader>'", "<cmd>lua require('harpoon.mark').add_file()<cr>", {
-    desc = "Add to Harpoon"
-  })
-  vim.keymap.set("n", "<leader>0", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", {
-    desc = "Show Harpoon"
-  })
-  vim.keymap.set("n", "<leader>1", "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", {
-    desc = "Harpoon Buffer 1"
-  })
-  vim.keymap.set("n", "<leader>2", "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", {
-    desc = "Harpoon Buffer 2"
-  })
-  vim.keymap.set("n", "<leader>3", "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", {
-    desc = "Harpoon Buffer 3"
-  })
-  vim.keymap.set("n", "<leader>4", "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", {
-    desc = "Harpoon Buffer 4"
-  })
-  vim.keymap.set("n", "<leader>5", "<cmd>lua require('harpoon.ui').nav_file(5)<cr>", {
-    desc = "Harpoon Buffer 5"
-  })
-  vim.keymap.set("n", "<leader>6", "<cmd>lua require('harpoon.ui').nav_file(6)<cr>", {
-    desc = "Harpoon Buffer 6"
-  })
-  vim.keymap.set("n", "<leader>7", "<cmd>lua require('harpoon.ui').nav_file(7)<cr>", {
-    desc = "Harpoon Buffer 7"
-  })
-  vim.keymap.set("n", "<leader>8", "<cmd>lua require('harpoon.ui').nav_file(8)<cr>", {
-    desc = "Harpoon Buffer 8"
-  })
-  vim.keymap.set("n", "<leader>9", "<cmd>lua require('harpoon.ui').nav_file(9)<cr>", {
-    desc = "Harpoon Buffer 9"
-  })
-
-  -- buffer
-  vim.keymap.set("n", "<leader>bb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", {
-    desc = "Telescope buffers"
-  })
-
-  -- clipboard
-  vim.keymap.set("v", "<leader>y", '"+y', {
-    desc = "Yank to clipboard"
-  })
-
-  -- gen
-  vim.keymap.set("v", "<leader>]", ":Gen<CR>")
-  vim.keymap.set("n", "<leader>]", ":Gen<CR>")
-
-  vim.keymap.set("v", "<C-s>", ":sort<CR>")                           -- Sort highlighted text in visual mode with Control+S
-  vim.keymap.set("v", "<leader>rr", '"hy:%s/<C-r>h//g<left><left>')   -- Replace all instances of highlighted words
-  vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")                        -- Move current line down
-  vim.keymap.set("v", "K", ":m '>-2<CR>gv=gv")                        -- Move current line up
-  vim.keymap.set("n", "<Tab>", "<cmd>bn<cr>")
-  vim.keymap.set("n", "<S-Tab>", "<cmd>bp<cr>")
-
-  vim.keymap.set("n", "*", "*zz")
-
-  vim.keymap.set("n", "n", "nzz")
-  vim.keymap.set("n", "N", "Nzz")
-
-  vim.keymap.set("n", "<C-d>", "<C-d>zz")
-  vim.keymap.set("n", "<C-u>", "<C-u>zz")
-
+    vim.keymap.set("n", "<leader>k", "<cmd>HopChar1<cr>")
+    vim.keymap.set("n", "<leader>l", "<cmd>HopLine<cr>")
+    vim.keymap.set("n", "<leader>w", "<cmd>HopWord<cr>")
 end
+-- Keymaps are automatically loaded on the VeryLazy event
+-- Default keymaps that are always set:
+-- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+-- Add any additional keymaps here
+-- Keymaps are automatically loaded on the VeryLazy event
+-- Default keymaps that are always set:
+-- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+-- Add any additional keymaps here
+-- folds
+vim.keymap.set("n", "<leader>Ne", "<cmd>NnnExplorer<cr>", {
+    desc = "Open Nnn Explorer",
+})
+
+vim.keymap.set("n", "<leader>Np", "<cmd>NnnPicker<cr>", {
+    desc = "Open Nnn Picker"
+})
+
+vim.keymap.set("n", "<Tab>", "<cmd>bn<cr>")
+vim.keymap.set("n", "<S-Tab>", "<cmd>bp<cr>")
+
+vim.keymap.set("n", "*", "*zz")
+
+vim.keymap.set("n", "n", "nzz")
+vim.keymap.set("n", "N", "Nzz")
+
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+
+-- lsp
+vim.keymap.set("n", "<leader><space>", "<cmd>CodeActionMenu<cr>", {
+    desc = "Code Action Menu"
+})
+
+-- folds
+vim.keymap.set("n", "<leader>z", "<cmd>normal! zMzv<cr>", {
+    desc = "Fold all others"
+})
+
+-- harpoon
+vim.keymap.set("n", "<leader>'", "<cmd>lua require('harpoon.mark').add_file()<cr>", {
+    desc = "Add to Harpoon"
+})
+vim.keymap.set("n", "<leader>0", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", {
+    desc = "Show Harpoon"
+})
+vim.keymap.set("n", "<leader>1", "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", {
+    desc = "Harpoon Buffer 1"
+})
+vim.keymap.set("n", "<leader>2", "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", {
+    desc = "Harpoon Buffer 2"
+})
+vim.keymap.set("n", "<leader>3", "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", {
+    desc = "Harpoon Buffer 3"
+})
+vim.keymap.set("n", "<leader>4", "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", {
+    desc = "Harpoon Buffer 4"
+})
+vim.keymap.set("n", "<leader>5", "<cmd>lua require('harpoon.ui').nav_file(5)<cr>", {
+    desc = "Harpoon Buffer 5"
+})
+vim.keymap.set("n", "<leader>6", "<cmd>lua require('harpoon.ui').nav_file(6)<cr>", {
+    desc = "Harpoon Buffer 6"
+})
+vim.keymap.set("n", "<leader>7", "<cmd>lua require('harpoon.ui').nav_file(7)<cr>", {
+    desc = "Harpoon Buffer 7"
+})
+vim.keymap.set("n", "<leader>8", "<cmd>lua require('harpoon.ui').nav_file(8)<cr>", {
+    desc = "Harpoon Buffer 8"
+})
+vim.keymap.set("n", "<leader>9", "<cmd>lua require('harpoon.ui').nav_file(9)<cr>", {
+    desc = "Harpoon Buffer 9"
+})
+
+-- buffer
+vim.keymap.set("n", "<leader>bb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", {
+    desc = "Telescope buffers"
+})
+
+-- clipboard
+vim.keymap.set("v", "<leader>y", '"+y', {
+    desc = "Yank to clipboard"
+})
+
+vim.keymap.set('n', '<D-s>', ':w<CR>')      -- Save
+vim.keymap.set('v', '<D-c>', '"+y')         -- Copy
+vim.keymap.set('n', '<D-v>', '"+P')         -- Paste normal mode
+vim.keymap.set('v', '<D-v>', '"+P')         -- Paste visual mode
+vim.keymap.set('c', '<D-v>', '<C-R>+')      -- Paste command mode
+vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
+
+
+-- Allow clipboard copy paste in neovim
+vim.api.nvim_set_keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+-- gen
+vim.keymap.set("v", "<leader>]", ":Gen<CR>")
+vim.keymap.set("n", "<leader>]", ":Gen<CR>")
+
+vim.keymap.set("v", "<C-s>", ":sort<CR>")                         -- Sort highlighted text in visual mode with Control+S
+vim.keymap.set("v", "<leader>rr", '"hy:%s/<C-r>h//g<left><left>') -- Replace all instances of highlighted words
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")                      -- Move current line down
+vim.keymap.set("v", "K", ":m '>-2<CR>gv=gv")                      -- Move current line up
+vim.keymap.set("n", "<Tab>", "<cmd>bn<cr>")
+vim.keymap.set("n", "<S-Tab>", "<cmd>bp<cr>")
+
+vim.keymap.set("n", "*", "*zz")
+
+vim.keymap.set("n", "n", "nzz")
+vim.keymap.set("n", "N", "Nzz")
+
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 -- keymapper are automatically loaded on the VeryLazy event
 -- Default keymapper that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymapper.lua

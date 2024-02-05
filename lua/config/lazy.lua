@@ -57,7 +57,7 @@ if vim.g.vscode then
     }
   })
 else
-  opts.colorscheme = "hardhacker"
+  --   opts.colorscheme = "hardhacker"
 
   require("lazy").setup({
     spec = {
@@ -135,8 +135,23 @@ else
 
       -- import any custom plugins here
       {
-        import = "plugins"
+        import = "plugins.themes"
       },
+      {
+        import = "plugins.ui"
+      },
+
+      {
+        import = "plugins.lang"
+      },
+
+      {
+        import = "plugins.editor"
+      },
+
+      {
+        import = "plugins.term"
+      }
     },
 
     defaults = {
