@@ -12,7 +12,7 @@ return {
 		config = function()
 			local themes = {
 				{
-					name = "HardHackerTheme",
+					name = "HardHacker",
 					colorscheme = "hardhacker"
 				},
 				{
@@ -92,6 +92,8 @@ return {
 	{
 		"tanvirtin/monokai.nvim",
 		name = "monokai",
+        lazy = false,
+        priority = 9000,
 		config = function()
 			require("monokai").setup({})
 			vim.cmd.colorscheme("monokai")
@@ -100,6 +102,8 @@ return {
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
+        lazy = false,
+        priority = 9000,
 		config = function()
 			-- local themer = require("utils.themer")
 			vim.cmd.colorscheme("catppuccin")

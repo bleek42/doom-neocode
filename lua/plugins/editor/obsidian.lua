@@ -12,8 +12,8 @@ return {
     },
 
     event = {
-      "BufReadPre " .. vim.fn.expand("~") .. "/c/second-brain/**.md",
-      "BufNewFile " .. vim.fn.expand("~") .. "/c/second-brain/**.md"
+        "BufReadPre " .. vim.fn.expand("~") .. "/mnt/c/Users/brand/OneDrive/Documents/.obsidian/**.md",
+        "BufNewFile " .. vim.fn.expand("~") .. "/mnt/c/Users/brand/OneDrive/Documents/.obsidian/**.md"
     },
     commands = {
       "ObsidianOpen",

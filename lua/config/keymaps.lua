@@ -1,3 +1,12 @@
+-- Keymaps are automatically loaded on the VeryLazy event
+-- Default keymaps that are always set:
+-- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+-- Add any additional keymaps here
+-- Keymaps are automatically loaded on the VeryLazy event
+-- Default keymaps that are always set:
+-- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+-- Add any additional keymaps here
+-- folds
 if vim.g.vscode then
     vim.keymap.set("n", "<C-b><C-s>", "<cmd>call VSCodeNotify('workbench.action.files.save')<cr>]")
     vim.keymap.set("n", "fmt", "<cmd>call VSCodeNotify('editor.action.formatDocument')<cr>")
@@ -11,22 +20,39 @@ if vim.g.vscode then
     vim.keymap.set("n", "<leader>l", "<cmd>HopLine<cr>")
     vim.keymap.set("n", "<leader>w", "<cmd>HopWord<cr>")
 end
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set:
--- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set:
--- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
--- folds
-vim.keymap.set("n", "<leader>Ne", "<cmd>NnnExplorer<cr>", {
-    desc = "Open Nnn Explorer",
-})
+if vim.fn.executable("nnn") then
+    vim.keymap.set("n", "<leader>fe", "<cmd>NnnExplorer<cr>", {
+        desc = "Open Nnn Explorer",
+    })
 
-vim.keymap.set("n", "<leader>Np", "<cmd>NnnPicker<cr>", {
-    desc = "Open Nnn Picker"
-})
+    vim.keymap.set("n", "<leader>fp", "<cmd>NnnPicker<cr>", {
+        desc = "Open Nnn Picker"
+    })
+elseif vim.fn.executable("ranger") then
+    vim.keymap.set("n", "<leader>fe", "<cmd>RangerExplorer<cr>", {
+        desc = "Open in file explorer (Ranger)",
+    })
+
+    vim.keymap.set("n", "<leader>fp", "<cmd>RangerPicker<cr>", {
+        desc = "Open in file picker (Ranger)"
+    })
+elseif vim.fn.executable("lf") then
+    vim.keymap.set("n", "<leader>fe", "<cmd>NnnExplorer<cr>", {
+        desc = "Open in file explorer (LF)"
+    })
+
+    vim.keymap.set("n", "<leader>fp", "<cmd>LfPicker<cr>", {
+        desc = "Open in file picker (LF)"
+    })
+else
+    vim.keymap.set("n", "<leader>fe", "<cmd>NeotreeExplorer<cr>", {
+        desc = "Open in file explorer (LF)"
+    })
+
+    vim.keymap.set("n", "<leader>fp", "<cmd>NeotreePicker<cr>", {
+        desc = "Open in file picker (LF)"
+    })
+end
 
 vim.keymap.set("n", "<Tab>", "<cmd>bn<cr>")
 vim.keymap.set("n", "<S-Tab>", "<cmd>bp<cr>")
@@ -111,7 +137,7 @@ vim.api.nvim_set_keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true 
 vim.keymap.set("v", "<leader>]", ":Gen<CR>")
 vim.keymap.set("n", "<leader>]", ":Gen<CR>")
 
-vim.keymap.set("v", "<C-s>", ":sort<CR>")                         -- Sort highlighted text in visual mode with Control+S
+vim.keymap.set("v", "<C-s>", ":sort<CR>")                         -- Sort highlighted text in visual mode in Control+S
 vim.keymap.set("v", "<leader>rr", '"hy:%s/<C-r>h//g<left><left>') -- Replace all instances of highlighted words
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")                      -- Move current line down
 vim.keymap.set("v", "K", ":m '>-2<CR>gv=gv")                      -- Move current line up

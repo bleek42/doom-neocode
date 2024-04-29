@@ -4,7 +4,6 @@ return {
     "nvim-lualine/lualine.nvim",
     dependencies = {
       "arkav/lualine-lsp-progress",
-      "hardhackerlabs/theme-vim"
     },
 
     config = function(plugin)

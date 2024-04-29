@@ -3,7 +3,7 @@ return {
     {
         "nvim-neo-tree/neo-tree.nvim",
         enabled = function()
-            if vim.fn.executable("nnn") or not vim.fn.executable("ranger") then
+            if vim.fn.executable("nnn") or not vim.fn.executable("ranger") or not vim.fn.executable("lf") then
                 return false
             end
 
@@ -12,8 +12,58 @@ return {
     },
 
     {
-        "luukvbaal/nnn.nvim",
+        "kelly-lin/ranger.nvim",
+        cmd = {
+            "Ranger"
+        },
+        dependencies = {
+            "nvim-lua/plenary.nvim"
+        },
+        enabled = function()
+            if vim.fn.executable('ranger') then
+                return true
+            end
 
+            return false
+        end,
+
+
+        config = function()
+            local ranger_open = require("ranger-nvim").OPEN_MODE
+            require("ranger-nvim").setup({
+                replace_netrw = true,
+                enable_cmds = true,
+
+                keybinds = {
+                    ["ov"] = ranger_open.vsplit,
+                    ["oh"] = ranger_open.split,
+                    ["ot"] = ranger_open.tabedit,
+                    ["or"] = ranger_open.rifle,
+                },
+
+                ui = {
+                    border = "shadow",
+                    width = 1.4,
+                    height = 1.4
+                }
+            })
+            vim.api.nvim_set_keymap("n", "<leader>fe", "RangerExplorer", {
+                noremap = true,
+                callback = function()
+                    require("ranger-nvim").open(true)
+                end,
+            })
+
+            vim.api.nvim_set_keymap("n", "<leader>fe", "RangerPicker", {
+                noremap = true,
+                callback = function()
+                    require("ranger-nvim").open(true)
+                end,
+            })
+        end,
+    },
+    {
+        "luukvbaal/nnn.nvim",
         cmd = {
             "NnnExplorer",
             "NnnPicker"
