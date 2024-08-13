@@ -3,7 +3,7 @@ return {
     {
         "nvim-neo-tree/neo-tree.nvim",
         enabled = function()
-            if vim.fn.executable("nnn") or not vim.fn.executable("ranger") or not vim.fn.executable("lf") then
+            if vim.fn.executable("nnn") or vim.fn.executable("ranger") or vim.fn.executable("lf") then
                 return false
             end
 
@@ -11,6 +11,78 @@ return {
         end,
     },
 
+    {
+        "lmburns/lf.nvim",
+        cmd = {
+            "Lf"
+        },
+        dependencies = { "toggleterm.nvim" },
+
+        enabled = function()
+            if vim.fn.executable('lf') then
+                return true
+            end
+            return false
+        end,
+
+        config = function()
+            -- This feature will not work if the plugin is lazy-loaded
+            vim.g.lf_netrw = 1
+
+            local opts = {
+                default_file_manager = true,                                 -- make lf default file manager
+                disable_netrw_warning = true,                                -- don't display a message when opening a directory with `default_file_manager` as true
+                escape_quit = true,                                          -- map escape to the quit command (so it doesn't go into a meta normal mode)
+                height = vim.fn.float2nr(vim.fn.round(0.75 * vim.o.lines)),  -- height of the *floating* window
+                width = vim.fn.float2nr(vim.fn.round(0.75 * vim.o.columns)), -- width of the *floating* window
+                direction = "vertical",
+                default_action = "drop",                                     -- default action when `Lf` opens a file
+                default_actions = {                                          -- default action keybindings
+                    ["<C-t>"] = "tabedit",
+                    ["<C-x>"] = "split",
+                    ["<C-v>"] = "vsplit",
+                    ["<C-o>"] = "tab drop",
+                },
+
+            }
+            opts.border = "shadow"
+            opts.winblend = 10        -- psuedotransparency level
+            opts.dir = "gwd"          -- directory where `lf` starts ('gwd' is git-working-directory, ""/nil is CWD)
+            opts.focus_on_open = true -- focus the current file when opening Lf (experimental)
+            opts.mappings = true      -- whether terminal buffer mapping is enabled
+            opts.tmux = false         -- tmux statusline can be disabled on opening of Lf
+
+            -- highlights = {                                               -- highlights passed to toggleterm
+            --     Normal = { link = "Normal" },
+            --     NormalFloat = { link = 'Normal' },
+            --     FloatBorder = { guifg = "<VALUE>", guibg = "<VALUE>" },
+            -- },
+
+            -- Layout configurations
+            -- layout_mapping = "<M-u>", -- resize window with this key
+            -- views = {                 -- window dimensions to rotate through
+            --     { width = 0.800, height = 0.800 },
+            --     { width = 0.600, height = 0.600 },
+            --     { width = 0.950, height = 0.950 },
+            --     { width = 0.500, height = 0.500, col = 0,   row = 0 },
+            --     { width = 0.500, height = 0.500, col = 0,   row = 0.5 },
+            --     { width = 0.500, height = 0.500, col = 0.5, row = 0 },
+            --     { width = 0.500, height = 0.500, col = 0.5, row = 0.5 },
+            -- }
+
+            require("lf").setup(opts)
+
+            -- vim.keymap.set("n", "<M-o>", "<Cmd>Lf<CR>")
+
+            -- vim.api.nvim_create_autocmd({
+            --     event = "User",
+            --     pattern = "LfTermEnter",
+            --     callback = function(a)
+            --         vim.api.nvim_buf_set_keymap(a.buf, "t", "q", "q", { nowait = true })
+            --     end,
+            -- })
+        end,
+    },
     {
         "kelly-lin/ranger.nvim",
         cmd = {

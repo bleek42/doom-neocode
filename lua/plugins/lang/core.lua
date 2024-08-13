@@ -5,8 +5,18 @@ return {
         'hrsh7th/nvim-cmp',
         event = 'InsertEnter',
         dependencies = {
-            { 'L3MON4D3/LuaSnip' },
+            'Exafunction/codeium.nvim',
+            'L3MON4D3/LuaSnip',
+            'saadparwaiz1/cmp_luasnip',
         },
+        opts = function(_, opts)
+            opts.snippet = {
+                expand = function(args)
+                    require("luasnip").lsp_expand(args.body)
+                end,
+            }
+            table.insert(opts.sources, { name = "luasnip" })
+        end,
         config = function()
             -- Here is where you configure the autocompletion settings.
             local lsp_zero = require('lsp-zero')
@@ -29,6 +39,36 @@ return {
         end
     },
 
+    {
+        'L3MON4D3/LuaSnip',
+        dependencies = {
+            "hrsh7th/nvim-cmp",
+            "rafamadriz/friendly-snippets",
+
+        },
+        build = (not LazyVim.is_win())
+            and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
+            or nil,
+
+    },
+
+    {
+        "Exafunction/codeium.nvim",
+        cmd = { 'Codeium' },
+        build = ':Codeium auth',
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "hrsh7th/nvim-cmp",
+        },
+
+    },
+
+    {
+        "rafamadriz/friendly-snippets",
+        config = function()
+            require("luasnip.loaders.from_vscode").lazy_load()
+        end,
+    },
     {
         "danymat/neogen",
         cmd = "Neogen",
@@ -83,6 +123,9 @@ return {
             })
         end,
     },
+    {
+        "saadparwaiz1/cmp_luasnip",
+    }
 }
 
 

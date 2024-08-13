@@ -89,6 +89,14 @@ else
                 import = "lazyvim.plugins.extras.coding.yanky"
             },
 
+            -- coding
+            {
+                import = "lazyvim.plugins.extras.coding.nvim-cmp"
+            },
+
+            {
+                import = "lazyvim.plugins.extras.coding.codeium"
+            },
 
             -- editor
             {
@@ -140,19 +148,15 @@ else
             },
 
             {
+                import = "plugins.editor"
+            },
+
+            {
                 import = "plugins.ui"
             },
 
             {
                 import = "plugins.lang"
-            },
-
-            {
-                import = "plugins.editor"
-            },
-
-            {
-                import = "plugins.term"
             }
         },
 

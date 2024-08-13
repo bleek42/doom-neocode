@@ -150,18 +150,20 @@ return {
         },
 
         config = function()
+            local lspconfig = require("lspconfig")
             local lsp_zero = require("lsp-zero")
-
 
             local lsp_handlers = {
                 lsp_zero.default_setup,
-                rust_analyzer = lsp_zero.noop,
-
-                lua_ls = function()
-                    local lua_opts = lsp_zero.nvim_lua_ls()
-                    require("lspconfig").lua_ls.setup(lua_opts)
+                function(server_name)
+                    require('lspconfig')[server_name].setup({})
                 end,
 
+                rust_analyzer = lsp_zero.noop,
+                lua_ls = function()
+                    local lua_opts = lsp_zero.nvim_lua_ls()
+                    lspconfig.lua_ls.setup(lua_opts)
+                end,
 
 
                 -- tsserver = lsp_zero.
@@ -185,12 +187,16 @@ return {
             "williamboman/mason-lspconfig.nvim",
         },
 
-        config = false,
-        -- init = function()
-        --     -- Disable automatic setup, we are doing it manually
-        --     -- vim.g.lsp_zero_extend_cmp = 0
-        --     -- vim.g.lsp_zero_extend_lspconfig = 0
-        -- end,
+        config = function()
+            -- Disable automatic setup, we are doing it manually
+            -- vim.g.lsp_zero_extend_cmp = 0
+            -- vim.g.lsp_zero_extend_lspconfig = 0
+            local lsp_zero = require('lsp-zero')
+
+            lsp_zero.extend_lspconfig({
+                capabilities = require('cmp_nvim_lsp').default_capabilities(),
+            })
+        end,
 
     },
 
@@ -209,17 +215,16 @@ return {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
             "VonHeikemen/lsp-zero.nvim",
+            "hrsh7th/nvim-cmp",
             "hrsh7th/cmp-nvim-lsp",
-            "mrcjkb/rustaceanvim",
-            "folke/neoconf.nvim",
-            "folke/neodev.nvim",
-            "hrsh7th/cmp-nvim-lsp",
+            "L3MON4D3/LuaSnip",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-cmdline",
-            "hrsh7th/nvim-cmp",
-            "L3MON4D3/LuaSnip",
+            "folke/neoconf.nvim",
+            "folke/neodev.nvim",
             "saadparwaiz1/cmp_luasnip",
+            "mrcjkb/rustaceanvim",
             "j-hui/fidget.nvim",
         },
 

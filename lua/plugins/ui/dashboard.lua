@@ -9,7 +9,7 @@ return {
             "nvim-tree/nvim-web-devicons"
         },
 
-        config = function(_,opts)
+        opts = function()
             -- local neovimHeader = [[
             --       ⠀⠀⠀⣠⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⣿⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
             --       ⠀⣴⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣶⣶⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -30,13 +30,17 @@ return {
             -- local file_explorer_cmds = {
 
             -- },
+            local file_explorer = vim.fn.executable("nnn") and vim.cmd("NnnExplorer") or
+                vim.fn.executable("ranger") and vim.cmd("Ranger") or
+                vim.fn.executable("lf") and vim.cmd("Lf") or vim.cmd("Telescope")
 
             local opts = {}
-            local file_explorer = vim.fn.executable("nnn") and "NnnExplorer" or vim.fn.executable("ranger") and "Ranger" or
-                vim.fn.executable("lf") and "ListFiles" or "Telescope"
-
             opts.theme = "doom"
 
+            opts.hide = {}
+            opts.hide.statusline = false
+
+            opts.config = {}
             opts.config.header = {
                 "                                                                              ",
                 "=================     ===============     ===============   ========  ========",
@@ -63,22 +67,22 @@ return {
             opts.config.center = {
                 {
                     desc = "Open File Explorer",
-                    keymap = "SPC N e",
+                    keymap = "SPC F e",
                     action = (file_explorer),
                     icon = " ",
                 },
 
                 {
                     desc = "Open File Picker",
-                    keymap = "SPC N p",
-                    action = "NnnPicker",
+                    keymap = "SPC F p",
+                    action = (file_explorer),
                     icon = " ",
                 },
 
 
                 {
-                    desc = "Last Nnn session",
-                    keymap = "SPC N s",
+                    desc = "Last Session",
+                    keymap = "SPC L s",
                     icon = "  ",
                 },
 
@@ -86,7 +90,7 @@ return {
                     icon = "  ",
                     desc = "Recent files",
                     action = "Telescope oldfiles",
-                    keymap = "SPC f r"
+                    keymap = "SPC R f"
                 },
 
                 {
@@ -125,7 +129,26 @@ return {
                 stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms ))" }
             end
 
-            require("dashboard").setup(opts)
+            for _, button in ipairs(opts.config.center) do
+                button.desc = button.desc .. string.rep(" ", 43 - #button.desc)
+                button.key_format = "  %s"
+            end
+
+            -- open dashboard after closing lazy
+            if vim.o.filetype == "lazy" then
+                vim.api.nvim_create_autocmd("WinClosed", {
+                    pattern = tostring(vim.api.nvim_get_current_win()),
+                    once = true,
+                    callback = function()
+                        vim.schedule(function()
+                            vim.api.nvim_exec_autocmds("UIEnter", { group = "dashboard" })
+                        end)
+                    end,
+                })
+            end
+
+            return opts
+            -- require("dashboard").setup(opts)
         end
     }
 }

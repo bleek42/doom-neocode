@@ -111,8 +111,9 @@ return {
 	},
 	{
 		"projekt0n/github-nvim-theme",
-		-- name = "github",
-
+        name = "github-theme",
+        lazy = false,
+        priority = 9000,
 		config = function()
 			require("github-theme").setup(
 				{
@@ -157,6 +158,8 @@ return {
 	{
 		"folke/tokyonight.nvim",
 		name = "tokyonight",
+        lazy = false,
+        priority = 9000,
 		config = function()
 			require("tokyonight").setup(
 				{

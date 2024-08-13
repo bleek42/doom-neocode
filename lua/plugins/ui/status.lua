@@ -13,7 +13,7 @@ return {
         require("lazyvim.util").deprecate("lualine.override", "lualine.opts")
       end
 
-      require("lualine").setup({
+            require("lualine").setup({
         extensions = {},
         options = {
           -- theme = "",
