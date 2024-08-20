@@ -25,6 +25,7 @@ return {
             "Trouble",
             "TroubleToggle"
         },
+
         config = function()
             local keymaps = {}
             keymaps.diagnostics = {
@@ -46,6 +47,7 @@ return {
                     action_keys = keymaps.diagnostics
                 }
             )
+
         end
     },
 
@@ -85,6 +87,7 @@ return {
 
     {
         "echasnovski/mini.move",
+        -- opts = {}
         keys = {
             {
                 "<M-l>",
@@ -103,7 +106,6 @@ return {
                 mode = { "n", "v" }
             }
         },
-        -- opts = {}
     },
 
     {
@@ -160,8 +162,8 @@ return {
         "wakatime/vim-wakatime",
         enabled = false,
         config = function()
-            local waka_time = require("wakatime")
-            waka_time.setup({})
+            local wakatime = require("wakatime")
+            wakatime.setup({})
         end
     },
 
@@ -169,7 +171,7 @@ return {
         "norcalli/nvim-colorizer.lua",
         name = "nvim-colorizer",
         config = function()
-            require("colorizer").setup()
+            require("colorizer").setup({})
         end
     },
 
@@ -229,7 +231,7 @@ return {
         "nacro90/numb.nvim",
         name = "numb",
         config = function()
-            require("numb").setup()
+            require("numb").setup({})
         end
     },
 
@@ -238,11 +240,13 @@ return {
         name = "suda"
     },
 
-    { "junegunn/vim-easy-align" },
+    {
+        "junegunn/vim-easy-align"
+},
 
     -- Use local .editorconfig files
     {
         "gpanders/editorconfig.nvim",
         name = "editorconfig"
-    },
+    }
 }

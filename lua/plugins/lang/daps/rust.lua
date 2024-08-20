@@ -1,7 +1,7 @@
-local dap = require("dap")
-
 local M = {}
 function M.setup()
+    local nodap, dap = pcall(require, "dap")
+
     dap.adapters.codelldb = function(cb, config)
         if config.preLaunchTask then
             vim.fn.system(config.preLaunchTask)

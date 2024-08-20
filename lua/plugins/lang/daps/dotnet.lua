@@ -1,4 +1,4 @@
-local dap = require("dap")
+-- local dap = require("dap")
 
 function Dotnet_build_project()
     local request = function()
@@ -45,6 +45,7 @@ end
 
 local M = {}
 function M.setup()
+    local _, dap = pcall(require, "dap")
     dap.adapters.coreclr = function(cb, config)
         if config.preLaunchTask then
             vim.fn.system(config.preLaunchTask)

@@ -2,7 +2,8 @@ return {
 
     {
         "akinsho/toggleterm.nvim",
-
+        lazy = false,
+        priority = 2000,
         commands = {
             "ToggleTerm",
             "ToggleTermToggleAll",
@@ -10,12 +11,8 @@ return {
             "TermSelect",
         },
 
-        version = "*",
-
-
-        config = function()
-
-            local opts = {
+        opts = function()
+            return {
 
                 -- open_mapping = [[<c-\>]], -- or { [[<c-\>]], [[<c-¥>]] } if you also use a Japanese keyboard.
                 -- on_create = fun(t: Terminal), -- function to run when the terminal is first created
@@ -49,7 +46,7 @@ return {
                 terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
                 persist_size = true,
                 persist_mode = true,      -- if set to true (default) the previous terminal mode will be remembered
-                direction = 'horizontal', -- | 'horizontal' | 'tab' | 'float',
+                direction = 'tab',        -- | 'horizontal' | 'tab' | 'float',
                 close_on_exit = true,     -- close the terminal window when the process exits
                 clear_env = false,        -- use only environmental variables from `env`, passed to jobstart()
                 -- Change the default shell. Can be a string or a function returning a string
@@ -61,7 +58,7 @@ return {
                     -- see :h nvim_open_win for details on borders however
                     -- the 'curved' border is a custom border type
                     -- not natively supported but implemented in this plugin.
-                    border = 'shadow', -- 'double' | 'shadow' | 'curved' | ... other options supported by win open
+                    -- border = 'shadow', -- 'double' | 'shadow' | 'curved' | ... other options supported by win open
                     -- like `size`, width, height, row, and col can be a number or function which is passed the current terminal
                     -- width = '<value>',
                     -- height = '<value>',
@@ -75,9 +72,9 @@ return {
                 size = function(term)
                     if term.direction == "horizontal" or term.direction == "float" then
                         return vim.o.lines * 0.4
-                    elseif term.direction == "vertical" then
-                        return vim.o.columns * 0.4
-                    elseif term.direction == "tab" then
+                    elseif term.direction == "vertical" or term.direction == "tab" then
+                        return vim.o.columns * 0.2
+                    else
                         return vim.o.lines * 0.3
                     end
                 end,
@@ -87,29 +84,23 @@ return {
                     name_formatter = function(term) --  term: Terminal
                         return term.name
                     end
-                },
+                }
             }
+        end,
 
+        config = function(_, opts)
             require("toggleterm").setup(opts);
         end
 
     },
 
     {
-        "ibhagwan/fzf-lua",
-        -- optional for icon support
-        dependencies = { "nvim-tree/nvim-web-devicons" },
-        config = function()
-            -- calling `setup` is optional for customization
-            require("fzf-lua").setup({})
-        end
-    },
-    {
         "rcarriga/nvim-notify",
 
         opts = {
             timeout = 0
         }
+
     },
 
     {
@@ -119,15 +110,9 @@ return {
             if vim.g.neovide or vim.g.vscode then
                 return false
             end
-
             return true
         end,
 
-        opts = function(_, opts)
-            opts.scroll = {
-                enabled = false
-            }
-        end
     },
 
     {

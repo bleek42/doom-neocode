@@ -4,12 +4,12 @@ return {
         "nvimdev/dashboard-nvim",
         event = "VimEnter",
         lazy = false,
-        priority = 9000,
+        priority = 2000,
         dependencies = {
             "nvim-tree/nvim-web-devicons"
         },
 
-        opts = function()
+        opts = function(_, opts)
             -- local neovimHeader = [[
             --       ⠀⠀⠀⣠⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⣿⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
             --       ⠀⣴⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣶⣶⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -30,17 +30,17 @@ return {
             -- local file_explorer_cmds = {
 
             -- },
-            local file_explorer = vim.fn.executable("nnn") and vim.cmd("NnnExplorer") or
-                vim.fn.executable("ranger") and vim.cmd("Ranger") or
-                vim.fn.executable("lf") and vim.cmd("Lf") or vim.cmd("Telescope")
+            -- local function file_explorer()
+            --     return vim.fn.executable('nnn') and "NnnExplorer" or
+            --         vim.fn.executable('ranger') and 'Ranger' or
+            --         vim.fn.executable('lf') and 'Lf' or 'Telescope'
+            -- end
 
-            local opts = {}
-            opts.theme = "doom"
 
-            opts.hide = {}
-            opts.hide.statusline = false
+            opts.hide = {
+                statusline = false
+            }
 
-            opts.config = {}
             opts.config.header = {
                 "                                                                              ",
                 "=================     ===============     ===============   ========  ========",
@@ -61,66 +61,63 @@ return {
                 "||.=='    _-'                                                     `' |  /==.||",
                 "=='    _-'                    {{ L A Z Y V I M }}                       \\/   `==",
                 "\\   _-'                                                                `-_   /",
-                " `''                                                                      ``'  ",
+                " `''                                                                      ``''",
             }
+
 
             opts.config.center = {
                 {
-                    desc = "Open File Explorer",
-                    keymap = "SPC F e",
-                    action = (file_explorer),
-                    icon = " ",
+                    keymap = "Telescope find_files",
+                    desc = "Find file",
+                    icon = " ",
+                    key = "f"
                 },
-
                 {
-                    desc = "Open File Picker",
-                    keymap = "SPC F p",
-                    action = (file_explorer),
-                    icon = " ",
+                    keymap = "Telescope oldfiles",
+                    desc = " Recent files",
+                    icon = " ",
+                    key = "r"
                 },
-
-
+                -- { keymap = "Telescope live_grep", desc = " Find text", icon = " ", key = "g" },
                 {
-                    desc = "Last Session",
-                    keymap = "SPC L s",
-                    icon = "  ",
+                    keymap = "ene | startinsert",
+                    desc = "New file",
+                    icon = " ",
+                    key = "n"
                 },
-
                 {
-                    icon = "  ",
-                    desc = "Recent files",
-                    action = "Telescope oldfiles",
-                    keymap = "SPC R f"
+                    keymap = "LazyConfig",
+                    desc = " Config",
+                    icon = " ",
+                    key = "c"
                 },
-
                 {
-                    icon = "  ",
-                    desc = "Find File",
-                    action = "Telescope find_files",
-                    keymap = "SPC f f"
+                    keymap = [[lua require("persistence").load()]],
+                    desc = " Restore Session",
+                    icon = " ",
+                    key = "s"
                 },
-
                 {
-                    icon = "  ",
-                    desc = "Find word",
-                    action = "Telescope live_grep",
-                    keymap = "SPC f g"
+                    keymap = "LazyExtras",
+                    desc = " Lazy Extras",
+                    icon = " ",
+                    key = "x"
                 },
-
                 {
+                    keymap = "Lazy",
+                    desc = " Lazy",
+                    icon = "󰒲 ",
+                    key = "l"
+                },
+                {
+                    keymap = "qall",
                     desc = "Quit",
-                    keymap = "qa",
                     icon = " ",
+                    key = "q"
                 },
-                -- { keymap = "Telescope find_files",                                     desc = " Find file",       icon = " ", key = "f" },
-                -- { keymap = "ene | startinsert",                                        desc = " New file",        icon = " ", key = "n" },
-                -- { keymap = "Telescope oldfiles",                                       desc = " Recent files",    icon = " ", key = "r" },
-                -- { keymap = "Telescope live_grep",                                      desc = " Find text",       icon = " ", key = "g" },
-                -- { keymap = [[lua require("lazyvim.util").telescope.config_files()()]], desc = " Config",          icon = " ", key = "c" },
-                -- { keymap = 'lua require("persistence").load()',                        desc = " Restore Session", icon = " ", key = "s" },
-                -- { keymap = "LazyExtras",                                               desc = " Lazy Extras",     icon = " ", key = "x" },
-                -- { keymap = "Lazy",                                                     desc = " Lazy",            icon = "󰒲 ", key = "l" },
             }
+
+
 
             opts.config.footer = function()
                 local stats = require("lazy").stats()
@@ -151,4 +148,5 @@ return {
             -- require("dashboard").setup(opts)
         end
     }
+
 }
