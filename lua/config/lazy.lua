@@ -8,8 +8,10 @@ end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 local opts = {}
-
-if vim.loop.os_uname().version:match("Windows") then
+local is_win = vim.uv.os_uname().sysname:find("Windows")
+print(is_win)
+if is_win then
+    print("Is LazyVim in Windows")
     opts.concurrency = 1
 end
 
@@ -32,11 +34,7 @@ if vim.g.vscode then
             },
 
             {
-                import = "plugins.editor.vscode"
-            },
-
-            {
-                import = "plugins.editor.telescope",
+                -- import = "plugins.editor.vscode"
             },
 
             {
@@ -60,7 +58,7 @@ if vim.g.vscode then
         }
     })
 else
-    opts.colorscheme = "catppuccin-mocha"
+    opts.colorscheme = "cyberdream"
 
     require("lazy").setup({
         spec = {
@@ -69,13 +67,11 @@ else
                 "LazyVim/LazyVim",
                 import = "lazyvim.plugins",
                 opts = opts
-            }, -- lazyvim plugins
+            },
+            -- lazyvim plugins
 
-            -- {
-            --     import = "lazyvim.plugins.extras.coding.cmp"
-            -- },
             {
-                import = "lazyvim.plugins.extras.editor.fzf"
+                import = "lazyvim.plugins.extras.editor"
             },
 
             {
@@ -83,19 +79,28 @@ else
             },
 
             {
-                import = "plugins.editor"
+                import = "lazyvim.plugins.extras.coding.luasnip"
             },
 
             {
-                import = "plugins.themes"
+                import = "lazyvim.plugins.extras.coding.neogen"
             },
 
+            {
+                import = "lazyvim.plugins.extras.coding.codeium"
+            },
+
+            {
+                import = "lazyvim.plugins.extras.coding.mini-comment"
+            },
+
+            {
+                import = "lazyvim.plugins.extras.coding.mini-surround"
+            },
+
+            -- extras
             {
                 import = "lazyvim.plugins.extras.ui.edgy"
-            },
-
-            {
-                import = "lazyvim.plugins.extras.editor.aerial"
             },
 
             {
@@ -107,7 +112,15 @@ else
             },
 
             {
-                import = "plugins.ui"
+                import = "lazyvim.plugins.extras.util.mini-hipatterns"
+            },
+
+            {
+                import = "lazyvim.plugins.extras.ui.treesitter-context"
+            },
+
+            {
+                import = "lazyvim.plugins.extras.lsp"
             },
 
             {
@@ -115,11 +128,18 @@ else
             },
 
             {
+                import = "lazyvim.plugins.extras.lang.git"
+            },
+
+            {
+                import = "lazyvim.plugins.extras.lang.markdown"
+            },
+            {
                 import = "lazyvim.plugins.extras.lang.python"
             },
 
             {
-                import = "lazyvim.plugins.extras.lang.yaml"
+                import = "lazyvim.plugins.extras.lang.docker"
             },
 
             {
@@ -127,7 +147,27 @@ else
             },
 
             {
-                import = "lazyvim.plugins.extras.lang.docker"
+                import = "lazyvim.plugins.extras.lang.sql"
+            },
+
+            {
+                import = "lazyvim.plugins.extras.lang.nix"
+            },
+
+            {
+                import = "lazyvim.plugins.extras.lang.nushell"
+            },
+
+            {
+                import = "lazyvim.plugins.extras.lang.terraform"
+            },
+
+            {
+                import = "lazyvim.plugins.extras.lang.yaml"
+            },
+
+            {
+                import = "lazyvim.plugins.extras.lang.toml"
             },
 
             {
@@ -139,25 +179,36 @@ else
             },
 
             {
-                import = "plugins.lang"
+                import = "lazyvim.plugins.extras.dap.core"
             },
 
             -- test / util
             {
+                import = "lazyvim.plugins.extras.util.dot"
+            },
+
+            {
                 import = "lazyvim.plugins.extras.test.core"
             },
-
-            -- {
-            --     import = "lazyvim.plugins.extras.util.mini-hipatterns"
-            -- },
-            {
-                import = "lazyvim.plugins.extras.ui.treesitter-context"
-            },
-
 
             {
                 import = "lazyvim.plugins.extras.util.rest"
             },
+
+            {
+                import = "plugins.editor"
+            },
+
+            {
+                import = "plugins.themes"
+            },
+
+            {
+                import = "plugins.ui"
+            },
+            {
+                import = "plugins.lang"
+            }
         },
 
         defaults = {
@@ -171,8 +222,8 @@ else
         },
         install = {
             colorscheme = {
-                "catppuccin",
-                "hardhacker",
+                "hardhacker-dark",
+                "cyberdream",
                 "tokyonight"
             },
         },

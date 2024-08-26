@@ -2,16 +2,15 @@ return {
     {
         "folke/tokyonight.nvim",
         name = "tokyonight",
-        lazy = false,
-        priority = 4000,
+        opts = {
+            style = "storm",
+            transparent = false
+        },
 
-        config = function()
-            local opts = {}
-            opts.style = "storm"
-            opts.transparent = false
-            require("tokyonight").setup()
+        config = function(_, opts)
+            require("tokyonight").setup(opts)
 
-            vim.cmd.colorscheme("tokyonight")
+            -- vim.cmd.colorscheme("tokyonight")
         end
     }
 }

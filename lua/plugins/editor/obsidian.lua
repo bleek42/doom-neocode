@@ -3,6 +3,8 @@ return {
 
     {
         "epwalsh/obsidian.nvim",
+        lazy = true,
+        enabled = false,
         dependencies = {
             "nvim-lua/plenary.nvim",
             "hrsh7th/nvim-cmp",

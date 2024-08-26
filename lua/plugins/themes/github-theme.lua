@@ -2,11 +2,14 @@ return {
     {
         "projekt0n/github-nvim-theme",
         name = "github-theme",
+        lazy = true,
+        event = 'VeryLazy',
 
-        config = function()
+        opts = {},
+        config = function(_, opts)
             -- opts.transparent = false
-            require("github-theme").setup({})
-            vim.cmd('colorscheme github_dark_tritanopia')
+            require("github-theme").setup(opts)
+            -- vim.cmd('colorscheme github_dark_tritanopia')
         end
     }
 }

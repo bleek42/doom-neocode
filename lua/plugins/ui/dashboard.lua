@@ -10,6 +10,7 @@ return {
         },
 
         opts = function(_, opts)
+            -- local opts = {}
             -- local neovimHeader = [[
             --       ⠀⠀⠀⣠⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⣿⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
             --       ⠀⣴⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣶⣶⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -37,10 +38,6 @@ return {
             -- end
 
 
-            opts.hide = {
-                statusline = false
-            }
-
             opts.config.header = {
                 "                                                                              ",
                 "=================     ===============     ===============   ========  ========",
@@ -66,55 +63,70 @@ return {
 
 
             opts.config.center = {
+
                 {
-                    keymap = "Telescope find_files",
-                    desc = "Find file",
+                    key = "e",
+                    icon = " ",
+                    desc = "File Explorer",
+                    action = "Lf"
+                },
+
+                {
+                    key = "f",
                     icon = " ",
-                    key = "f"
+                    desc = "Find file",
+                    action = "FzfLua",
                 },
+
                 {
-                    keymap = "Telescope oldfiles",
-                    desc = " Recent files",
+                    key = "r",
                     icon = " ",
-                    key = "r"
+                    desc = " Recent files",
+                    action = "Telescope oldfiles"
                 },
+
                 -- { keymap = "Telescope live_grep", desc = " Find text", icon = " ", key = "g" },
                 {
-                    keymap = "ene | startinsert",
-                    desc = "New file",
+                    key = "n",
                     icon = " ",
-                    key = "n"
+                    desc = "New file",
+                    action = "ene | startinsert",
                 },
+
                 {
-                    keymap = "LazyConfig",
-                    desc = " Config",
+                    key = "c",
+                    desc = "Config",
                     icon = " ",
-                    key = "c"
+                    action = "LazyConfig"
                 },
+
                 {
-                    keymap = [[lua require("persistence").load()]],
-                    desc = " Restore Session",
+                    key = "s",
                     icon = " ",
-                    key = "s"
+                    desc = " Restore Session",
+                    action = [[lua require("persistence").load()]]
                 },
+
                 {
-                    keymap = "LazyExtras",
-                    desc = " Lazy Extras",
+                    key = "x",
                     icon = " ",
-                    key = "x"
+                    desc = " Lazy Extras",
+                    action = "LazyExtras"
                 },
+
                 {
-                    keymap = "Lazy",
-                    desc = " Lazy",
+                    key = "l",
                     icon = "󰒲 ",
-                    key = "l"
+                    desc = " Lazy",
+                    keymap = "Lazy"
                 },
+
                 {
-                    keymap = "qall",
-                    desc = "Quit",
+                    key = "Q",
                     icon = " ",
-                    key = "q"
-                },
+                    desc = "Quit",
+                    keymap = "qall"
+                }
             }
 
 

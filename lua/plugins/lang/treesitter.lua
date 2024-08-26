@@ -4,6 +4,8 @@ return {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         dependencies = { "p00f/nvim-ts-rainbow" },
+        lazy = false,
+        priority = 1000,
 
         opts = function(_, opts)
             if vim.loop.os_uname().sysname:lower():match("windows") then

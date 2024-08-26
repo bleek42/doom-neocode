@@ -1,11 +1,11 @@
 return {
 
     {
-        "williamboman/mason-lspconfig.nvim",
-        dependencies = {
-            "williamboman/mason.nvim"
-        },
+        '  "williamboman/mason.nvim'
+    },
 
+    {
+        "williamboman/mason-lspconfig.nvim",
         opts = {
             ensure_installed = {
                 'lua_ls',
@@ -78,7 +78,7 @@ return {
                 -- provide the inlay hints.
                 inlay_hints = {
                     enabled = true,
-                    exclude = {}, -- filetypes for which you don't want to enable inlay hints
+                    -- exclude = {}, -- filetypes for which you don't want to enable inlay hints
                 },
                 -- Enable this to enable the builtin LSP code lenses on Neovim >= 0.10.0
                 -- Be aware that you also will need to properly configure your LSP server to
@@ -117,7 +117,7 @@ return {
                                     path = vim.split(package.path, ";"),
                                 },
                                 diagnostics = {
-                                    globals = { "vim" },
+                                    globals = { "vim", "LazyVim" },
                                 },
                                 telemetry = {
                                     enabled = false,
@@ -157,20 +157,26 @@ return {
                 ---@type table<string, fun(server:string, opts:lspconfig.options):boolean?>
                 setup = {
 
-                    eslint = function(server, opts)
-                        require("lazyvim.util").lsp.on_attach(function(client)
-                            if client.name == "eslint" then
-                                client.server_capabilities.documentFormattingProvider = true
-                            elseif client.name == "tsserver" then
-                                client.server_capabilities.documentFormattingProvider = false
-                            end
-                        end)
+                    -- function(server, opts)
+                    --     server.setup(opts)
+                    -- end,
+
+                    biome = function(server, opts)
+                        print('lsp:' .. server)
                     end,
 
+                    -- eslint = function(server, opts)
+                    --     require("lazyvim.util").lsp.on_attach(function(client)
+                    --         if client.name == "eslint" then
+                    --             client.server_capabilities.documentFormattingProvider = true
+                    --         elseif client.name == "tsserver" then
+                    --             client.server_capabilities.documentFormattingProvider = false
+                    --         end
+                    --     end)
+                    -- end,
                     tsserver = function(server, opts)
                         -- disable tsserver
                         print('lsp:' .. server)
-                        local has_ts_tools, tstools = pcall(require, "typescript-tools")
 
                         local formatter = LazyVim.lsp.formatter({
                             name = 'biome: lsp',
@@ -184,9 +190,10 @@ return {
 
                         -- print(vim.inspect(opts))
 
+                        local has_ts_tools, ts_tools = pcall(require, "typescript-tools")
                         if has_ts_tools then
                             print('disabled tsserver; using typescript-tools')
-                            tstools.setup(opts)
+                            -- ts_tools.setup(opts)
                             return false
                         end
 
@@ -195,30 +202,30 @@ return {
                         return true
                     end,
 
-                    bashls = function(server, opts)
-                        -- local function get_client(buf)
-                        --     return LazyVim.lsp.get_clients({ name = "bashls", bufnr = buf })[1]
-                        -- end
+                    -- bashls = function(server, opts)
+                    --     -- local function get_client(buf)
+                    --     --     return LazyVim.lsp.get_clients({ name = "bashls", bufnr = buf })[1]
+                    --     -- end
 
-                        -- print('lsp:' .. server)
-                        -- print(vim.inspect(opts))
+                    --     -- print('lsp:' .. server)
+                    --     -- print(vim.inspect(opts))
 
-                        local formatter = LazyVim.lsp.formatter({
-                            name = "shfmt: lsp",
-                            primary = false,
-                            priority = 200,
-                            filter = "shfmt"
-                        })
+                    --     local formatter = LazyVim.lsp.formatter({
+                    --         name = "shfmt: lsp",
+                    --         primary = false,
+                    --         priority = 200,
+                    --         filter = "shfmt"
+                    --     })
 
-                        -- register the formatter with LazyVim
-                        LazyVim.format.register(formatter)
-                        -- end,
-                    end,
+                    --     -- register the formatter with LazyVim
+                    --     LazyVim.format.register(formatter)
+                    --     -- end,
+                    -- end,
 
                 }
             }
 
-            return lspconfig_opts
+            return lsp_opts
         end,
     },
 
@@ -276,6 +283,9 @@ return {
         end
     },
 
+    {
+        "williamboman/mason.nvim",
+    }
     -- {
     --     'hrsh7th/nvim-cmp',
     --     event = 'InsertEnter',

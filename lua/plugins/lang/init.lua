@@ -3,34 +3,35 @@ return {
     {
         "danymat/neogen",
         cmd = "Neogen",
-        opts = function()
-            return {
-                snippet_engine = "luasnip",
-                languages = {
-                    lua = {
-                        template = {
-                            annotation_convention = "emmylua"
-                        }
-                    },
-                    typescript = {
-                        template = {
-                            annotation_convention = "tsdoc"
-                        }
-                    },
-                    typescriptreact = {
-                        template = {
-                            annotation_convention = "tsdoc"
-                        }
+        opts = {
+            snippet_engine = "luasnip",
+            languages = {
+                lua = {
+                    template = {
+                        annotation_convention = "emmylua"
+                    }
+                },
+                typescript = {
+                    template = {
+                        annotation_convention = "tsdoc"
+                    }
+                },
+                typescriptreact = {
+                    template = {
+                        annotation_convention = "tsdoc"
                     }
                 }
             }
-        end,
+        }
     },
 
     {
         'pmizio/typescript-tools.nvim',
+        lazy = true,
+        event = 'LazyFile',
         dependencies = {
             'nvim-lua/plenary.nvim',
+            'neovim/nvim-lspconfig'
         },
         ft = {
             "typescript",
@@ -56,13 +57,59 @@ return {
                     allowIncompleteCompletions = false,
                     allowRenameOfImportPath = false
                 },
-            }
+            },
+
+            handlers = {
+                ["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+                    -- LazyVim.lsp.on_supports_method("textDocument/publishDiagnostics",  function(client, bufnr)
+                    local ts_error_translator = require("ts-error-translator")
+                    ts_error_translator.translate_diagnostics(err, result, ctx, config)
+                    vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
+                    -- end
+                end
+            },
         },
 
-        -- config = function(_, opts)
-        --     -- print(vim.inspect(opts))
-        --     require("typescript-tools").setup(opts)
-        -- end,
+        config = function(_, opts)
+            -- print(vim.inspect(opts))
+            local ts_tools = require("typescript-tools")
+            ts_tools.setup(opts)
+        end,
+    },
+
+    {
+        'dmmulroy/tsc.nvim',
+        lazy = true,
+        event = 'LazyFile',
+        ft = {
+            "typescript",
+            "typescriptreact",
+            "typescript.tsx"
+        },
+
+        opts = {},
+
+        config = function(_, opts)
+            local tsc = require('tsc')
+            tsc.setup(opts)
+        end
+    },
+
+    {
+        'dmmulroy/ts-error-translator.nvim',
+        lazy = true,
+        event = 'VeryLazy',
+        ft = {
+            'typescript',
+            'typescriptreact',
+            'typescript.tsx'
+        },
+
+        opts = {},
+
+        config = function(_, opts)
+            require("ts-error-translator").setup(opts)
+        end,
     },
 
     {
@@ -105,15 +152,15 @@ return {
             },
         },
 
-        config = function(_, opts)
-            vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
-            if vim.fn.executable("rust-analyzer") == 0 then
-                LazyVim.error(
-                    "**rust-analyzer** not found in PATH, please install it.\nhttps://rust-analyzer.github.io/",
-                    { title = "rustaceanvim" }
-                )
-            end
-        end,
+        -- config = function(_, opts)
+        --     vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
+        --     if vim.fn.executable("rust-analyzer") == 0 then
+        --         LazyVim.error(
+        --             "**rust-analyzer** not found in PATH, please install it.\nhttps://rust-analyzer.github.io/",
+        --             { title = "rustaceanvim" }
+        --         )
+        --     end
+        -- end,
     }
 
 }

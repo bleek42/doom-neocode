@@ -12,6 +12,7 @@ return {
             'hrsh7th/cmp-emoji',
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
+            'Exafunction/codeium.nvim'
         },
 
         ---@diagnostic disable-next-line: undefined-doc-name
@@ -76,11 +77,7 @@ return {
             "hrsh7th/nvim-cmp",
         },
 
-        config = function()
-            local codeium = require("codeium")
-
-            codeium.setup({})
-        end,
+        opts = {},
 
     },
 

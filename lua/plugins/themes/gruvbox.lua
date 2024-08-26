@@ -2,10 +2,15 @@ return {
     {
         "ellisonleao/gruvbox.nvim",
         name = "gruvbox",
+        lazy = true,
+        event = 'VeryLazy',
 
-        config = function()
+        opts = function()
             vim.o.background = "dark"
-            vim.cmd.colorscheme("gruvbox")
+        end,
+
+        config = function(_, opts)
+            vim.cmd("colorscheme gruvbox")
         end
     }
 }

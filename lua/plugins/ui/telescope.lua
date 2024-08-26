@@ -1,6 +1,7 @@
 return {
     {
         "nvim-telescope/telescope.nvim",
+        enabled = false,
         lazy = true,
         event = "VeryLazy",
         cmd = "Telescope",
