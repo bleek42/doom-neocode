@@ -5,10 +5,12 @@ return {
         lazy = (vim.fn.executable('lf') and false) or true,
         priority = (vim.fn.executable('lf') and 5000) or nil,
         cmd = {
-            "Lf",
+            "LfOpen",
             "LfOpenInDirectory",
         },
-        dependencies = { "toggleterm.nvim" },
+        dependencies = {
+            "toggleterm.nvim"
+        },
 
         enabled = function()
             if vim.fn.executable('lf') then
@@ -23,7 +25,7 @@ return {
         end,
 
         opts = function()
-            local default_opts = {
+            return {
                 border = "shadow",
                 winblend = 10,                                               -- psuedotransparency level
                 dir = nil,                                                   -- directory where `lf` starts ('gwd' is git-working-directory, ""/nil is CWD)
@@ -52,8 +54,6 @@ return {
                     FloatBorder = { guifg = "green", guibg = "black" },
                 }
             }
-
-            return default_opts
         end,
 
         config = function(_, opts)
@@ -87,7 +87,7 @@ return {
         -- },
 
         enabled = function()
-            if vim.fn.executable('ranger') then
+            if not vim.fn.executable('lf') and vim.fn.executable('ranger') then
                 return true
             end
 

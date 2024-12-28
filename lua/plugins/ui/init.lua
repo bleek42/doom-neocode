@@ -2,13 +2,14 @@ return {
 
     {
         "akinsho/toggleterm.nvim",
+        name = "toggleterm.nvim",
         lazy = false,
         priority = 2000,
         commands = {
             "ToggleTerm",
             "ToggleTermToggleAll",
-            "TermExec",
-            "TermSelect",
+            "ToggleTermExec",
+            "ToggleTermSelect",
         },
 
         opts = function()

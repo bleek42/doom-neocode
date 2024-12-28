@@ -1,7 +1,7 @@
 return {
 
     {
-        '  "williamboman/mason.nvim'
+        "williamboman/mason.nvim"
     },
 
     {
@@ -224,6 +224,7 @@ return {
                     -- end,
 
                 }
+
             }
 
             return lsp_opts
@@ -238,7 +239,7 @@ return {
         dependencies = {
             "neovim/nvim-lspconfig",
             "williamboman/mason-lspconfig.nvim",
-            "nvim-tree/nvim-web-devicons"      -- optional
+            "nvim-tree/nvim-web-devicons" -- optional
         },
 
         opts = {
@@ -283,9 +284,6 @@ return {
         end
     },
 
-    {
-        "williamboman/mason.nvim",
-    }
     -- {
     --     'hrsh7th/nvim-cmp',
     --     event = 'InsertEnter',

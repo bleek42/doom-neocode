@@ -34,12 +34,9 @@ if vim.g.vscode then
             },
 
             {
-                -- import = "plugins.editor.vscode"
-            },
-
-            {
                 import = "plugins.lang.treesitter"
             }
+
         },
         performance = {
             rtp = {
@@ -113,10 +110,6 @@ else
                 import = "lazyvim.plugins.extras.editor.fzf"
             },
 
-            -- {
-            --     import = "lazyvim.plugins.extras.editor.telescope"
-            -- },
-
             {
                 import = "lazyvim.plugins.extras.editor.illuminate"
             },
@@ -178,7 +171,7 @@ else
             },
 
             {
-                import = "lazyvim.plugins.extras.lsp.none-ls"
+                import = "lazyvim.plugins.extras.coding.blink"
             },
 
             {
