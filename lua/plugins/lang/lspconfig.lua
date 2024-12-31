@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 return {
 
     {
@@ -44,8 +45,7 @@ return {
         dependencies = {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
-            "hrsh7th/nvim-cmp",
-            "hrsh7th/cmp-nvim-lsp",
+            "saghen/blink.cmp",
             "folke/neoconf.nvim",
             "folke/neodev.nvim",
             "pmizio/typescript-tools.nvim",
@@ -56,7 +56,7 @@ return {
             local keymaps = require("lazyvim.plugins.lsp.keymaps").get()
 
             ---@class PluginLspOpts
-            local lsp_opts = {
+            local opts = {
 
                 -- options for vim.diagnostic.config()
                 ---@type vim.diagnostic.Opts
@@ -227,8 +227,17 @@ return {
 
             }
 
-            return lsp_opts
+            return opts
         end,
+        config = function(_, opts)
+            local lspconfig = require('lspconfig')
+            for server, config in pairs(opts.servers) do
+                -- passing config.capabilities to blink.cmp merges with the capabilities in your
+                -- `opts[server].capabilities, if you've defined it
+                config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+                lspconfig[server].setup(config)
+            end
+        end
     },
 
     -- Extra lsp features

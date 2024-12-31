@@ -7,9 +7,7 @@ return {
         desc = "Debugging support. Requires language specific adapters to be configured. (see lang extras)",
         dependencies = {
             { 'rcarriga/nvim-dap-ui' },
-            { "jay-babu/mason-nvim-dap.nvim" },
-            { dir = "daps.rust" },
-            { dir = "daps.dotnet" },
+            { "jay-babu/mason-nvim-dap.nvim" }
         },
 
         -- keys = {

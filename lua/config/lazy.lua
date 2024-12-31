@@ -35,6 +35,10 @@ if vim.g.vscode then
 
             {
                 import = "plugins.lang.treesitter"
+            },
+
+            {
+                import = "plugins.ui.snacks"
             }
 
         },
@@ -55,9 +59,7 @@ if vim.g.vscode then
         }
     })
 else
-    opts.colorscheme = function()
-        vim.cmd("colorscheme cyberdream")
-    end
+    opts.colorscheme = "cyberdream"
 
     require("lazy").setup({
         spec = {
@@ -159,19 +161,11 @@ else
             },
 
             {
-                import = "lazyvim.plugins.extras.ai.codeium"
-            },
-
-            {
                 import = "lazyvim.plugins.extras.coding.mini-comment"
             },
 
             {
                 import = "lazyvim.plugins.extras.coding.mini-surround"
-            },
-
-            {
-                import = "lazyvim.plugins.extras.coding.blink"
             },
 
             {
@@ -276,11 +270,7 @@ else
             version = false -- always use the latest git commit
             -- version = "*", -- try installing the latest stable version for plugins that support semver
         },
-        -- install = {
-        --     colorscheme = {
-        --         "cyberdream"
-        --     },
-        -- },
+
         checker = {
             -- automatically check for plugin updates
             enabled = false
@@ -301,7 +291,8 @@ else
                     "matchparen",
                     "tarPlugin",
                     "tohtml",
-                    "zipPlugin"
+                    "zipPlugin",
+                    "nvim-cmp"
                 }
             }
         }

@@ -34,8 +34,8 @@ return {
 
     {
         "NTBBloodbath/doom-one.nvim",
-        lazy = true,
-        event = "VeryLazy",
+        lazy = false,
+        priority = 1000,
 
         init = function()
             -- Add color to cursor
@@ -78,6 +78,7 @@ return {
 
     {
         "scottmckendry/cyberdream.nvim",
+        name = "cyberdream",
         lazy = false,
         priority = 1000,
 
@@ -170,10 +171,10 @@ return {
         "catppuccin/nvim",
         name = "catppuccin",
         lazy = false,
-        priority = 3000,
-        setup = function()
-            vim.g.catppuccin_flavour = "mocha"
-        end,
+        priority = 1000,
+        -- setup = function()
+        --     vim.g.catppuccin_flavour = "mocha"
+        -- end,
 
         -- opts = {},
         -- config = function(_, opts)
@@ -187,7 +188,7 @@ return {
         "navarasu/onedark.nvim",
         name = "onedark",
         lazy = false,
-        priority = 2000,
+        priority = 1000,
 
         opts = {
             style = "cool",
